@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:${DJANGO_PORT}
+    env_file: 
+      - .env
+    volumes:
+      - .:/home/sysadmin/bank/bank/
+      - /home/sysadmin/http_logs/bank.log:/home/sysadmin/http_logs/bank.log
+    ports:
+      - "${DJANGO_PORT}:${DJANGO_PORT}"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=bankapp.settings
+      - DATABASE_URL=os.getenv('DATABASE_URL')
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DATABASE_PORT2}:${DATABASE_PORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
