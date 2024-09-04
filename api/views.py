@@ -80,15 +80,15 @@ class BranchesFilterList(ListAPIView):
             return Response({"detail": "No branches found matching the criteria."}, status=status.HTTP_404_NOT_FOUND)
 
 
-class AccountBalanceViewSet(generics.ListCreateAPIView):
+"""class AccountBalanceViewSet(generics.ListCreateAPIView):
     def retrieve(self, request, pk=None):
         try:
             account = Account.objects.get(pk=pk)
         except Account.DoesNotExist:
             return Response({"error": "Account not found"}, status=404)
-
-        serializer = AccountSerializer(account)
-        return Response(serializer.data)
+        
+        serializer= AccountSerializer(Account)
+        return Response(serializer.data)"""
 
 class WithdrawViewSet(generics.ListCreateAPIView):
     queryset = Withdraw.objects.all()

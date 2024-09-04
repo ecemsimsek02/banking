@@ -6,3 +6,6 @@ djangorestframework
 django-filter
 python-dotenv
 python-decouple
+drf_yasg
+django-rest-swagger
+django-cors-headers
